@@ -60,6 +60,7 @@ alias ga="git add"
 alias gcl="git clone"
 alias gcm="git commit -m"
 alias gpush="git push"
+alias gd="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
 
 # Misc. tools
 alias grep=rg
