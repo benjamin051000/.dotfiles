@@ -1,10 +1,16 @@
 # .dotfiles
 These are my environment files for various programs on my computer.
 
+# Clone the repo
+Follow this tutorial:
+https://www.atlassian.com/git/tutorials/dotfiles
+
 ## Requirements
-Kitty (terminal emulator)
-Neovim (text editor)
-zsh (shell)
+- Kitty (terminal emulator)
+- Neovim (text editor)
+  - [Packer](https://github.com/wbthomason/packer.nvim#quickstart)
+- zsh (shell)
+
 
 ## zsh Cheatsheet:
 - if it is needed by a command run non-interactively: .zshenv
