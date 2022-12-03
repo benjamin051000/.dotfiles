@@ -87,6 +87,7 @@ export GIT_EDITOR VISUAL EDITOR
 alias icat="kitty +kitten icat"
 alias img=icat
 alias diff="kitty +kitten diff"
+alias kssh="kitty +kitten ssh"
 
 # Manage dotfiles bare git repo
 alias dotfiles="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
