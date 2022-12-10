@@ -58,7 +58,7 @@ alias v=vi
 alias gs="git status"
 alias ga="git add"
 alias gcl="git clone"
-alias gcm="git commit -m"
+alias gcm="git commit"
 alias gpush="git push"
 alias gd="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
 
