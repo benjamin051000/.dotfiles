@@ -46,7 +46,7 @@ alias ...="cd ../.."
 
 # Fedora dnf
 alias dnfi="sudo dnf install"
-alias dnfc="dnf check-update"
+alias dnfc="sudo dnf check-update"
 alias dnfu="sudo dnf update"
 
 # neovim
