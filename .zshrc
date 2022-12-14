@@ -46,7 +46,7 @@ alias ...="cd ../.."
 
 # Fedora dnf
 alias dnfi="sudo dnf install"
-alias dnfc="dnf check-update"
+alias dnfc="sudo dnf check-update"
 alias dnfu="sudo dnf update"
 
 # neovim
@@ -58,7 +58,7 @@ alias v=vi
 alias gs="git status"
 alias ga="git add"
 alias gcl="git clone"
-alias gcm="git commit -m"
+alias gcm="git commit"
 alias gpush="git push"
 alias gd="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
 
@@ -87,6 +87,7 @@ export GIT_EDITOR VISUAL EDITOR
 alias icat="kitty +kitten icat"
 alias img=icat
 alias diff="kitty +kitten diff"
+alias kssh="kitty +kitten ssh"
 
 # Manage dotfiles bare git repo
 alias dotfiles="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
