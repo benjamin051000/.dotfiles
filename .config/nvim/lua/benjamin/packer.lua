@@ -36,16 +36,12 @@ return require('packer').startup(function(use)
     use "windwp/nvim-autopairs" -- Auto pair closing () [] {} "" etc
 
     use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
-
     use "williamboman/mason.nvim" -- Auto-install LSPs
+    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim" -- lsp lines
 
     -- vim surround 
-    use({
-        "kylechui/nvim-surround",
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    })
+    use({ "kylechui/nvim-surround", tag = "*",}) -- Use for stability; omit to use `main` branch for the latest features
 
-    use "https://git.sr.ht/~whynothugo/lsp_lines.nvim" -- lsp lines
 
     use 'numToStr/Comment.nvim' -- auto comment
 
@@ -56,6 +52,21 @@ return require('packer').startup(function(use)
         wants = {'nvim-treesitter'}, -- or require if not used so far
         -- after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
     }
+
+    -- nvim-cmp autocompletion
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
+    -- luasnip, bc some dude on discord 
+    -- said to install these too
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
+
+    -- tabnine
+    -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+
 
 end)
 
