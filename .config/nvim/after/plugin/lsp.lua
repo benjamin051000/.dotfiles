@@ -1,3 +1,5 @@
+-- Set up lspconfig with nvim-cmp.
+local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- lspconfig default settings
 -- Mappings.
@@ -44,16 +46,19 @@ local lsp_flags = {
 }
 
 require 'lspconfig'.pyright.setup{
+    capabilities = default_capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
 }
 
 require('lspconfig')['tsserver'].setup{
+    capabilities = default_capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
 }
 
 require 'lspconfig'.rust_analyzer.setup{
+    capabilities = default_capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
     -- Server-specific settings...
@@ -79,6 +84,7 @@ require 'lspconfig'.rust_analyzer.setup{
 
 -- c/c++
 require'lspconfig'.clangd.setup{
+    capabilities = default_capabilities,
     on_attach = on_attach,
     flags = lsp_flags
 }
