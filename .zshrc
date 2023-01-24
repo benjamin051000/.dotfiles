@@ -58,6 +58,7 @@ alias v=vi
 # alias g=git
 alias gs="git status"
 alias ga="git add"
+alias gsw="git switch"
 alias glog="git log"
 alias gcl="git clone"
 alias gcm="git commit"
