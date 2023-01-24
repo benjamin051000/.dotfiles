@@ -55,12 +55,15 @@ alias vi=vim
 alias v=vi
 
 # git
+# alias g=git
 alias gs="git status"
 alias ga="git add"
+alias glog="git log"
 alias gcl="git clone"
 alias gcm="git commit"
 alias gpush="git push"
-alias gd="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
+alias gpull="git pull"
+alias gdiff="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
 
 # Misc. tools
 alias grep=rg
