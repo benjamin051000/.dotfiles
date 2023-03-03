@@ -23,3 +23,5 @@ vim.cmd("inoremap <C-c> <Esc>")
 -- set leader key to spacebar (instead of \)
 vim.g.mapleader = " "
 
+-- fun one
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")

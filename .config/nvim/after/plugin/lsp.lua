@@ -57,33 +57,35 @@ require('lspconfig')['tsserver'].setup{
     flags = lsp_flags,
 }
 
-require 'lspconfig'.rust_analyzer.setup{
-    capabilities = default_capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                }
-            },
-            procMacro = {
-                enable = true
-            },
-        },
-    }
-}
+-- This is handled by rust-tools
+--
+-- require 'lspconfig'.rust_analyzer.setup{
+--     capabilities = default_capabilities,
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     -- Server-specific settings...
+--     settings = {
+--         ["rust-analyzer"] = {
+--             imports = {
+--                 granularity = {
+--                     group = "module",
+--                 },
+--                 prefix = "self",
+--             },
+--             cargo = {
+--                 buildScripts = {
+--                     enable = true,
+--                 }
+--             },
+--             procMacro = {
+--                 enable = true
+--             },
+--         },
+--     }
+-- }
 
 -- c/c++
-require'lspconfig'.clangd.setup{
+require 'lspconfig'.clangd.setup{
     capabilities = default_capabilities,
     on_attach = on_attach,
     flags = lsp_flags
