@@ -29,3 +29,9 @@
 
 [push]
 	autoSetupRemote = true
+
+[safe]
+       directory = /home/benjamin/src/hipergator
+       directory = /home/benjamin/src/hipergator
+       directory = /home/benjamin/src/hipergator/par-comp-arch
+

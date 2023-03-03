@@ -65,7 +65,8 @@ alias gcm="git commit"
 alias gpush="git push"
 alias gpull="git pull"
 alias gdiff="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
-
+alias gd=gdiff
+  
 # Misc. tools
 alias grep=rg
 alias cat=bat
@@ -90,6 +91,7 @@ export GIT_EDITOR VISUAL EDITOR
 # Kitty
 alias icat="kitty +kitten icat"
 alias img=icat
+alias pic=icat
 alias diff="kitty +kitten diff"
 alias kssh="kitty +kitten ssh"
 
@@ -101,3 +103,13 @@ eval "$(starship init zsh)"
 
 # thefuck
 eval $(thefuck --alias)
+
+# set PATH so it includes user's private ~/.local/bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Add quartus to the path because why not 
+export PATH="/home/benjamin/.intelFPGA/20.1/quartus/bin:$PATH"
+
+export PATH=$PATH:/home/benjamin/.spicetify
