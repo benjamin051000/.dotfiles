@@ -107,6 +107,9 @@ eval $(thefuck --alias)
 # open files in default app
 alias open=xdg-open
 
+# weather :)
+alias weather='curl wttr.in'
+
 # set PATH so it includes user's private ~/.local/bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
