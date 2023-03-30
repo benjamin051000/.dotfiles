@@ -1,6 +1,7 @@
 [user]
 	name = Benjamin Wheeler
 	email = benjaminwheeler0510@gmail.com
+	signingkey = /home/benjamin/.ssh/id_rsa.pub
 [init]
     defaultBranch = main
 
@@ -34,4 +35,9 @@
        directory = /home/benjamin/src/hipergator
        directory = /home/benjamin/src/hipergator
        directory = /home/benjamin/src/hipergator/par-comp-arch
+	directory = /home/benjamin/src/hipergator/par-comp-arch/assignment_4
 
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
