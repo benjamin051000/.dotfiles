@@ -91,6 +91,13 @@ require 'lspconfig'.clangd.setup{
     flags = lsp_flags
 }
 
+
+-- require 'lspconfig'.shellcheck.setup{
+--     capabilities = default_capabilities,
+--     on_attach = on_attach,
+--     flags = lsp_flags
+-- }
+
 -- lsp lines
 require("lsp_lines").setup()
 vim.diagnostic.config({
