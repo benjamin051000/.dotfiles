@@ -10,6 +10,17 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
+-- Shamelessly stolen from https://github.com/AlphaKeks/home/blob/master/.config/nvim/after/plugin/lsp.lua#L94-102
+local function format_on_save(bufnr)
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = format_group,
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.buf.format()
+		end,
+	})
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -37,7 +48,10 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts) 
+	-- TODO BUG sometimes this doesn't show up, like for stylua (which doesn't have an lsp here...)
+	vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+
+	format_on_save(bufnr)
 end
 
 local lsp_flags = {
@@ -62,7 +76,7 @@ rt.setup({
 	server = {
 		on_attach = function(client, bufnr)
 			-- Run the normal on_attach function for all LSP stuffs
-			on_attach(client, bufnr) 
+			on_attach(client, bufnr)
 
 			-- Hover actions
 			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
@@ -73,21 +87,17 @@ rt.setup({
 		capabilities = default_capabilities,
 
 		settings = {
+			-- See settings here: https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
+			-- and here: https://hw0lff.github.io/rust-analyzer-docs/2022-07-04/index.html#rust-analyzer_cargo_buildscripts_enable
 			["rust-analyzer"] = {
-				imports = {
-					granularity = {
-						group = "module",
-					},
-					prefix = "self",
-				},
-				cargo = {
-					buildScripts = {
-						enable = true,
-					},
-				},
-				procMacro = {
-					enable = true,
-				},
+				-- For now, let's just stick with the defaults.
+
+				-- imports = {
+				-- 	granularity = {
+				-- 		group = "module",
+				-- 	},
+				-- 	prefix = "self",
+				-- },
 			},
 		}, -- end of settings
 	}, -- end of server
@@ -108,8 +118,15 @@ require("lspconfig").clangd.setup({
 
 -- lsp lines
 require("lsp_lines").setup()
+
 vim.diagnostic.config({
 	virtual_text = false,
+})
+
+require("lspconfig").lua_ls.setup({
+	capabilities = default_capabilities,
+	on_attach = on_attach,
+	flags = lsp_flags,
 })
 
 vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })

@@ -1,6 +1,6 @@
 -- Treesitter
 require 'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
+    -- ensure_installed = "all",
     ignore_install = {""},
     auto_install = true,    
     
