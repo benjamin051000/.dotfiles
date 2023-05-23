@@ -35,6 +35,7 @@
        directory = /home/benjamin/src/hipergator
        directory = /home/benjamin/src/hipergator
        directory = /home/benjamin/src/hipergator/par-comp-arch
+	directory = /home/benjamin/src/hipergator/par-comp-arch/assignment_4
 
 [gpg]
 	format = ssh
