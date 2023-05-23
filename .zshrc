@@ -35,10 +35,19 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # Aliases
-alias ls="ls --color=auto"
-alias l="ls -F"
-alias ll="ls -lah"
-alias t=tree
+if [ $(command -v 'exa') ]; then
+    alias l="exa -F"
+    alias ls="exa -F"
+    alias ll="exa -laF --no-user --git --header"
+    alias t="exa -Tl --level 5 --no-user --git --header"
+
+else
+    echo "exa not installed! Using tree instead"
+    alias ls="ls --color=auto"
+    alias l="ls -F"
+    alias ll="ls -lah"
+    alias t=tree
+fi
 
 alias py=python3
 # zsh has .. builtin!
@@ -116,6 +125,22 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Add quartus to the path because why not 
-export PATH="/home/benjamin/.intelFPGA/20.1/quartus/bin:$PATH"
+if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
+    export PATH="/home/benjamin/.intelFPGA/20.1/quartus/bin:$PATH"
+fi
 
-export PATH=$PATH:/home/benjamin/.spicetify
+if [ -d "$HOME/intelFPGA/20.1/quartus/bin" ]; then
+    export PATH="/home/benjamin/intelFPGA/20.1/quartus/bin:$PATH"
+fi
+
+if [ -d "/home/benjamin/intelFPGA_lite/21.1/questa_fse/bin/" ]; then
+    export LM_LICENSE_FILE="/home/benjamin/intelFPGA_lite/LR-090178_License.dat" 
+    export PATH="/home/benjamin/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
+fi
+
+
+if [ -d "$HOME/.spicetify" ]; then
+    export PATH=$PATH:/home/benjamin/.spicetify
+fi
+
+
