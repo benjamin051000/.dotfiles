@@ -7,7 +7,7 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/benjamin/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -18,21 +18,6 @@ compinit
 # Basic auto/tab complete:
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/benjamin/.anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/benjamin/.anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/benjamin/.anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/benjamin/.anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 # Aliases
 if [ $(command -v 'exa') ]; then
@@ -73,7 +58,7 @@ alias gcl="git clone"
 alias gcm="git commit"
 alias gpush="git push"
 alias gpull="git pull"
-alias gdiff="git difftool --no-symlinks --dir-diff"  # Uses Kitty diff tool
+alias gdiff="git difftool --no-symlinks --dir-diff"
 alias gd=gdiff
   
 # Misc. tools
@@ -126,21 +111,21 @@ fi
 
 # Add quartus to the path because why not 
 if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="/home/benjamin/.intelFPGA/20.1/quartus/bin:$PATH"
+    export PATH="$HOME/.intelFPGA/20.1/quartus/bin:$PATH"
 fi
 
 if [ -d "$HOME/intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="/home/benjamin/intelFPGA/20.1/quartus/bin:$PATH"
+    export PATH="$HOME/intelFPGA/20.1/quartus/bin:$PATH"
 fi
 
 if [ -d "/home/benjamin/intelFPGA_lite/21.1/questa_fse/bin/" ]; then
     export LM_LICENSE_FILE="/home/benjamin/intelFPGA_lite/LR-090178_License.dat" 
-    export PATH="/home/benjamin/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
+    export PATH="$HOME/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
 fi
 
 
 if [ -d "$HOME/.spicetify" ]; then
-    export PATH=$PATH:/home/benjamin/.spicetify
+    export PATH=$PATH:$HOME/.spicetify
 fi
 
 
