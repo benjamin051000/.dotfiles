@@ -78,7 +78,7 @@ fi
 ##############################
 # TODO how does this change if it's installed via package manager?
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-if [ $(command -v fd) && $(command -v fzf) ]; then
+if [ $(command -v fd) ] && [ $(command -v fzf) ]; then
     # Use fd instead of gnu find
     export FZF_CTRL_T_COMMAND="fd --hidden --follow --exclude .git --exclude .SYNC"
     export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
@@ -201,7 +201,9 @@ alias dotfiles="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 eval "$(starship init zsh)"
 
 # thefuck
-eval $(thefuck --alias)
+if [ $(command -v thefuck) ]; then
+    eval $(thefuck --alias)
+fi
 
 # open files in default app
 alias open=xdg-open
