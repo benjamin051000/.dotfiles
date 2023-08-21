@@ -7,19 +7,94 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
+zstyle ':completion:*' completer _complete _ignored
 zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+##################################################
 # Added by me
+##################################################
 
+# TODO did I add this manually?
 # Basic auto/tab complete:
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select  # TODO does this override above similarl line?
 zmodload zsh/complist
 
+##############################
+# Get SOC DV stuff set up
+##############################
+# WARNING this file clobbers LD_LIBRARY_PATH! It's not my fault.
+[ -e .socdvrc ] && source .socdvrc
+
+##############################
+# Set paths
+##############################
+# ~/.local directory
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
+    export PATH="$HOME/.intelFPGA/20.1/quartus/bin:$PATH"
+fi
+
+if [ -d "$HOME/intelFPGA/20.1/quartus/bin" ]; then
+    export PATH="$HOME/intelFPGA/20.1/quartus/bin:$PATH"
+fi
+
+if [ -d "$HOME/intelFPGA_lite/21.1/questa_fse/bin/" ]; then
+    export LM_LICENSE_FILE="$HOME/intelFPGA_lite/LR-090178_License.dat" 
+    export PATH="$HOME/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
+fi
+
+if [ -d "$HOME/.spicetify" ]; then
+    export PATH=$PATH:$HOME/.spicetify
+fi
+
+# ~/utils directory
+if [ -d "$HOME/utils" ] ; then
+    UTILS="$HOME/utils"
+
+    export PATH="$UTILS/bin:$PATH"
+    export MANPATH="$UTILS/share:$MANPATH"
+
+    # Set up C libraries and whatnot
+    export C_INCLUDE_PATH="$UTILS/include:$C_INCLUDE_PATH"
+    export CPLUS_INCLUDE_PATH="$UTILS/include:$CPLUS_INCLUDE_PATH"
+
+    export LIBRARY_PATH="$UTILS/lib:$LIBRARY_PATH"
+    export LD_LIBRARY_PATH="$UTILS/lib:$LD_LIBRARY_PATH"
+
+    unset UTILS
+else
+    echo "Can't find ~/utils dir. Skipping"
+fi
+
+##############################
+# Set up fzf
+##############################
+# TODO how does this change if it's installed via package manager?
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+if [ $(command -v fd) && $(command -v fzf) ]; then
+    # Use fd instead of gnu find
+    export FZF_CTRL_T_COMMAND="fd --hidden --follow --exclude .git --exclude .SYNC"
+    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
+
+    export FZF_ALT_C_COMMMAND="$FZF_CTRL_T_COMMAND --type directory"
+    export FZF_ALT_C_OPTS="--preview 'exa --tree {}'"
+fi
+
+# Reverse search history via C-r
+if [ ! $(command -v fzf) ]; then
+    bindkey '^R' history-incremental-search-backward
+fi
+
+##############################
 # Aliases
+##############################
 if [ $(command -v 'exa') ]; then
     alias l="exa -F"
     alias ls="exa -F"
@@ -34,22 +109,35 @@ else
     alias t=tree
 fi
 
-alias py=python3
+# From https://unix.stackexchange.com/questions/49802/follow-a-moved-file-to-its-destination-directory
+# Follow copied and moved files to destination directory
+goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
+cpf() { cp "$@" && goto "$_"; }
+mvf() { mv "$@" && goto "$_"; }
+
 # zsh has .. builtin!
+# alias ..="cd .."
 alias ...="cd ../.."
 
 # Fedora dnf
-alias dnfi="sudo dnf install"
-alias dnfc="sudo dnf check-update"
-alias dnfu="sudo dnf update"
+if [ $(command -v dnf) ]; then
+    alias dnfi="sudo dnf install"
+    alias dnfc="sudo dnf check-update"
+    alias dnfu="sudo dnf update"
+fi
 
-# neovim
-alias vim=nvim
+# (neo)vim aliases
+# these are set up in a redundant manner, where
+# v will always work even if you only have vi 
+# or vim installed
+if [ $(command -v nvim) ]; then
+    alias vim=nvim
+fi
 alias vi=vim
 alias v=vi
 
+
 # git
-# alias g=git
 alias gs="git status"
 alias ga="git add"
 alias gsw="git switch"
@@ -62,26 +150,43 @@ alias gdiff="git difftool --no-symlinks --dir-diff"
 alias gd=gdiff
   
 # Misc. tools
-alias grep=rg
-alias cat=bat
+if [ $(command -v rg) ]; then
+    alias grep=rg
+fi
 
-# Reverse search history via C-r
-bindkey '^R' history-incremental-search-backward
+if [ $(command -v bat) ]; then
+    alias cat=bat
+fi
+
+alias tm=tmux
+
+alias c=clear
+
+alias py=python3
 
 # Clipboard
 alias clip="xclip -selection c"
 
+##############################
 # Edit buffer in vim
+##############################
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
+##############################
 # Set editors to neovim
+##############################
+# TODO what if it isn't installed? can I use the `v` alias?
 GIT_EDITOR=nvim
 VISUAL=nvim
 EDITOR=nvim
 export GIT_EDITOR VISUAL EDITOR
 
+
+##############################
+# Other
+##############################
 # Kitty
 alias icat="kitty +kitten icat"
 alias img=icat
@@ -103,29 +208,3 @@ alias open=xdg-open
 
 # weather :)
 alias weather='curl wttr.in'
-
-# set PATH so it includes user's private ~/.local/bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# Add quartus to the path because why not 
-if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="$HOME/.intelFPGA/20.1/quartus/bin:$PATH"
-fi
-
-if [ -d "$HOME/intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="$HOME/intelFPGA/20.1/quartus/bin:$PATH"
-fi
-
-if [ -d "/home/benjamin/intelFPGA_lite/21.1/questa_fse/bin/" ]; then
-    export LM_LICENSE_FILE="/home/benjamin/intelFPGA_lite/LR-090178_License.dat" 
-    export PATH="$HOME/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
-fi
-
-
-if [ -d "$HOME/.spicetify" ]; then
-    export PATH=$PATH:$HOME/.spicetify
-fi
-
-
