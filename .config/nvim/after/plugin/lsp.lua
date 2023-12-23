@@ -117,7 +117,7 @@ require("lspconfig").clangd.setup({
 -- }
 
 -- lsp lines
-require("lsp_lines").setup()
+-- require("lsp_lines").setup()
 
 vim.diagnostic.config({
 	virtual_text = false,
@@ -129,4 +129,4 @@ require("lspconfig").lua_ls.setup({
 	flags = lsp_flags,
 })
 
-vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+-- vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
