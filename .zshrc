@@ -78,19 +78,8 @@ else
     # echo "Can't find ~/utils dir. Skipping"
 fi
 
-##############################
-# Set up fzf
-##############################
-# TODO how does this change if it's installed via package manager?
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-if [ $(command -v fd) ] && [ $(command -v fzf) ]; then
-    # Use fd instead of gnu find
-    export FZF_CTRL_T_COMMAND="fd --hidden --follow --exclude .git --exclude .SYNC"
-    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
-
-    export FZF_ALT_C_COMMMAND="$FZF_CTRL_T_COMMAND --type directory"
-    export FZF_ALT_C_OPTS="--preview 'eza --tree {}'"
-fi
+# Set up fzf shell integration (^T, ^R, **, etc.)
+eval "$(fzf --zsh)"
 
 # Reverse search history via C-r
 if [ ! $(command -v fzf) ]; then
