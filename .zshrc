@@ -178,7 +178,7 @@ if [ -d "$HOME/utils" ] ; then
 
     unset UTILS
 else
-    echo "Can't find ~/utils dir. Skipping"
+    # echo "Can't find ~/utils dir. Skipping"
 fi
 
 ##############################
@@ -192,7 +192,7 @@ if [ $(command -v fd) ] && [ $(command -v fzf) ]; then
     export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
 
     export FZF_ALT_C_COMMMAND="$FZF_CTRL_T_COMMAND --type directory"
-    export FZF_ALT_C_OPTS="--preview 'exa --tree {}'"
+    export FZF_ALT_C_OPTS="--preview 'eza --tree {}'"
 fi
 
 # Reverse search history via C-r
@@ -203,14 +203,14 @@ fi
 ##############################
 # Aliases
 ##############################
-if [ $(command -v 'exa') ]; then
-    alias l="exa -F"
-    alias ls="exa -F"
-    alias ll="exa -laF --no-user --git --header"
-    alias t="exa -Tl --level 5 --no-user --git --header"
+if [ $(command -v 'eza') ]; then
+    alias l="eza -F"
+    alias ls="eza -F"
+    alias ll="eza -laF --no-user --git --header"
+    alias t="eza -Tl --level 5 --no-user --git --header"
 
 else
-    echo "exa not installed! Using tree instead"
+    echo "eza not installed! Using tree instead"
     alias ls="ls --color=auto"
     alias l="ls -F"
     alias ll="ls -lah"
@@ -318,3 +318,10 @@ alias open=xdg-open
 
 # weather :)
 alias weather='curl wttr.in'
+
+# quartus stuff
+export QSYS_ROOTDIR="/home/benjamin/.intelFPGA_lite/23.1std/quartus/sopc_builder/bin"
+export LM_LICENSE_FILE='.intelFPGA_lite/23.1std/LR-162888_License.dat'
+# add it to the path
+export PATH="$PATH:/home/benjamin/.intelFPGA_lite/23.1std/quartus/bin/"
+export PATH="$PATH:/home/benjamin/.intelFPGA_lite/23.1std/questa_fse/bin/"
