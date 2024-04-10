@@ -18,23 +18,18 @@ compinit
 # Added by me
 ##################################################
 
-# From https://vi.stackexchange.com/questions/31671/set-o-vi-in-zsh-backspace-doesnt-delete-non-inserted-characters
-# zsh uses "vi" mode, which normally won't let you delete chars from a previous insertion. This fixes that.
-bindkey "^H" backward-delete-char
-bindkey "^?" backward-delete-char
+# bindkey -v is more like vi than vim. Here are some vim-like patches:
+# (I think this is) from https://vi.stackexchange.com/questions/31671/set-o-vi-in-zsh-backspace-doesnt-delete-non-inserted-characters
+bindkey "^?" backward-delete-char  # vim-like backspace instead of vi-like
+bindkey "^W" backward-kill-word 
+bindkey "^H" backward-delete-char      # Control-h also deletes the previous char
+bindkey "^U" backward-kill-line            
 
-# TODO did I add this manually?
-# Basic auto/tab complete:
 zmodload zsh/complist
 
 ##############################
 # Set paths
 ##############################
-# ~/.local directory
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
 if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
     export PATH="$HOME/.intelFPGA/20.1/quartus/bin:$PATH"
 fi
@@ -71,33 +66,24 @@ else
     # echo "Can't find ~/utils dir. Skipping"
 fi
 
-# Set up fzf shell integration (^T, ^R, **, etc.)
-eval "$(fzf --zsh)"
-
-# Reverse search history via C-r
-if [ ! $(command -v fzf) ]; then
-    bindkey '^R' history-incremental-search-backward
-fi
-
 ##############################
 # Aliases
 ##############################
-if [ $(command -v 'eza') ]; then
+if command -v eza &> /dev/null; then
     alias l="eza -F"
     alias ls="eza -F"
     alias ll="eza -laF --no-user --git --header"
     alias t="eza -Tl --level 5 --no-user --git --header"
 
 else
-    echo "eza not installed! Using tree instead"
     alias ls="ls --color=auto"
     alias l="ls -F"
     alias ll="ls -lah"
     alias t=tree
 fi
 
-# From https://unix.stackexchange.com/questions/49802/follow-a-moved-file-to-its-destination-directory
 # Follow copied and moved files to destination directory
+# From https://unix.stackexchange.com/questions/49802/follow-a-moved-file-to-its-destination-directory
 goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
@@ -107,7 +93,7 @@ mvf() { mv "$@" && goto "$_"; }
 alias ...="cd ../.."
 
 # Fedora dnf
-if [ $(command -v dnf) ]; then
+if command -v dnf &> /dev/null; then
     alias dnfi="sudo dnf install"
     alias dnfc="sudo dnf check-update"
     alias dnfu="sudo dnf update"
@@ -117,7 +103,7 @@ fi
 # these are set up in a redundant manner, where
 # v will always work even if you only have vi 
 # or vim installed
-if [ $(command -v nvim) ]; then
+if command -v nvim &> /dev/null; then
     alias vim=nvim
 fi
 alias vi=vim
@@ -137,26 +123,46 @@ alias gpull="git pull"
 # alias gdiff="git difftool --no-symlinks --dir-diff"
 # alias gd=gdiff
   
-# Misc. tools
-if [ $(command -v rg) ]; then
+# Starship prompt
+eval "$(starship init zsh)"
+
+
+# open files in default app
+alias open=xdg-open
+
+# weather :)
+alias weather='curl wttr.in'
+
+if command -v fzf &> /dev/null; then
+	# Set up fzf shell integration (^T, ^R, **, etc.)
+	eval "$(fzf --zsh)"
+else
+	# Reverse search history via C-r
+    bindkey '^R' history-incremental-search-backward
+fi
+
+if command -v rg &> /dev/null; then
     alias grep=rg
 fi
 
-if [ $(command -v bat) ]; then
+if command -v bat &> /dev/null; then
     alias cat=bat
 fi
 
-alias tm=tmux
+alias tm="tmux"
 
-alias c=clear
+alias py="python3"
 
-alias py=python3
+# thefuck
+if command -v thefuck &> /dev/null; then
+    eval $(thefuck --alias)
+fi
 
 # Clipboard
 alias clip="xclip -selection c"
 
 ##############################
-# Edit buffer in vim
+# Edit zsh buffer in vim
 ##############################
 autoload -U edit-command-line
 zle -N edit-command-line
@@ -182,22 +188,6 @@ alias pic=icat
 alias diff="kitty +kitten diff"
 alias kssh="kitty +kitten ssh"
 
-# Manage dotfiles bare git repo
-alias dotfiles="$(which git) --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-
-# Starship prompt
-eval "$(starship init zsh)"
-
-# thefuck
-if [ $(command -v thefuck) ]; then
-    eval $(thefuck --alias)
-fi
-
-# open files in default app
-alias open=xdg-open
-
-# weather :)
-alias weather='curl wttr.in'
 
 # quartus stuff
 export QSYS_ROOTDIR="/home/benjamin/.intelFPGA_lite/23.1std/quartus/sopc_builder/bin"
