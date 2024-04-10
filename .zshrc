@@ -151,7 +151,7 @@ fi
 
 alias tm="tmux"
 
-alias py="python3"
+alias py="python3.12"
 
 # thefuck
 if command -v thefuck &> /dev/null; then
