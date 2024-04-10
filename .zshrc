@@ -158,6 +158,10 @@ if command -v thefuck &> /dev/null; then
     eval $(thefuck --alias)
 fi
 
+if command -v cbonsai &> /dev/null; then
+    alias bonsai="cbonsai --life 40 --multiplier 5 --time 20 --screensaver"
+fi
+
 # Clipboard
 alias clip="xclip -selection c"
 
