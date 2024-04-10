@@ -162,6 +162,12 @@ if command -v cbonsai &> /dev/null; then
     alias bonsai="cbonsai --life 40 --multiplier 5 --time 20 --screensaver"
 fi
 
+if command -v pv &> /dev/null; then
+	rmpv() {
+		rm -rv "$1" | pv -l -s $(du -a "$1" | wc -l) > /dev/null
+	}
+fi
+
 # Clipboard
 alias clip="xclip -selection c"
 
