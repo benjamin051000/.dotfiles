@@ -1,15 +1,29 @@
 # .dotfiles
-These are my environment files for various programs on my computer.
+These are my environment files for my computer.
 
-# Clone the repo
-Follow this tutorial:
-https://www.atlassian.com/git/tutorials/dotfiles
+# Installation
+```bash
+# Clone the repository.
+cd ~
+gh repo clone .dotfiles --recurse-submodules
+cd .dotfiles
+# Use GNU stow to apply dotfiles.
+stow .
+# Optionally, use --adopt to bring in new changes.
+stow --adopt .
+
+# Use git like normal.
+cd .dotfiles 
+git status
+```
 
 ## Requirements
 - Kitty (terminal emulator)
 - Neovim (text editor)
   - [Packer](https://github.com/wbthomason/packer.nvim#quickstart)
 - zsh (shell)
+    - fzf
+- tmux
 
 
 ## zsh Cheatsheet:
