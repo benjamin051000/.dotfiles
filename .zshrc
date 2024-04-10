@@ -18,6 +18,11 @@ compinit
 # Added by me
 ##################################################
 
+# From https://vi.stackexchange.com/questions/31671/set-o-vi-in-zsh-backspace-doesnt-delete-non-inserted-characters
+# zsh uses "vi" mode, which normally won't let you delete chars from a previous insertion. This fixes that.
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+
 # TODO did I add this manually?
 # Basic auto/tab complete:
 zstyle ':completion:*' menu select  # TODO does this override above similarl line?
