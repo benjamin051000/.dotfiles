@@ -7,7 +7,7 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' menu select 
 zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
@@ -25,14 +25,7 @@ bindkey "^?" backward-delete-char
 
 # TODO did I add this manually?
 # Basic auto/tab complete:
-zstyle ':completion:*' menu select  # TODO does this override above similarl line?
 zmodload zsh/complist
-
-##############################
-# Get SOC DV stuff set up
-##############################
-# WARNING this file clobbers LD_LIBRARY_PATH! It's not my fault.
-[ -e .socdvrc ] && source .socdvrc
 
 ##############################
 # Set paths
