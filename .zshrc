@@ -30,17 +30,16 @@ zmodload zsh/complist
 ##############################
 # Set paths
 ##############################
-if [ -d "$HOME/.intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="$HOME/.intelFPGA/20.1/quartus/bin:$PATH"
+# quartus stuff
+if [ -d "$HOME/.intelFPGA_lite/23.1std/quartus/bin/" ]; then
+	export PATH="$PATH:$HOME/.intelFPGA_lite/23.1std/quartus/bin/"
+	export QSYS_ROOTDIR="/home/benjamin/.intelFPGA_lite/23.1std/quartus/sopc_builder/bin"
 fi
 
-if [ -d "$HOME/intelFPGA/20.1/quartus/bin" ]; then
-    export PATH="$HOME/intelFPGA/20.1/quartus/bin:$PATH"
-fi
-
-if [ -d "$HOME/intelFPGA_lite/21.1/questa_fse/bin/" ]; then
-    export LM_LICENSE_FILE="$HOME/intelFPGA_lite/LR-090178_License.dat" 
-    export PATH="$HOME/intelFPGA_lite/21.1/questa_fse/bin/:$PATH"
+# Questa
+if [ -d "$HOME/.intelFPGA_lite/23.1std/questa_fse/bin/" ]; then
+	export PATH="$PATH:$HOME/.intelFPGA_lite/23.1std/questa_fse/bin/"
+	export LM_LICENSE_FILE="$HOME/.intelFPGA_lite/23.1std/LR-162888_License.dat"
 fi
 
 if [ -d "$HOME/.spicetify" ]; then
@@ -72,7 +71,7 @@ fi
 if command -v eza &> /dev/null; then
     alias l="eza -F"
     alias ls="eza -F"
-    alias ll="eza -laF --no-user --git --header"
+    alias ll="eza -laF --git --group --header"
     alias t="eza -Tl --level 5 --no-user --git --header"
 
 else
@@ -191,6 +190,12 @@ export GIT_EDITOR VISUAL EDITOR
 ##############################
 # Other
 ##############################
+
+if ! command -v reboot &> /dev/null; then
+	alias reboot="systemctl reboot"
+fi
+
+
 # Kitty
 alias icat="kitty +kitten icat"
 alias img=icat
@@ -198,10 +203,18 @@ alias pic=icat
 alias diff="kitty +kitten diff"
 alias kssh="kitty +kitten ssh"
 
+# Fun prompt
+fortune 
+pokemon-colorscripts --random
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# quartus stuff
-export QSYS_ROOTDIR="/home/benjamin/.intelFPGA_lite/23.1std/quartus/sopc_builder/bin"
-export LM_LICENSE_FILE='.intelFPGA_lite/23.1std/LR-162888_License.dat'
-# add it to the path
-export PATH="$PATH:/home/benjamin/.intelFPGA_lite/23.1std/quartus/bin/"
-export PATH="$PATH:/home/benjamin/.intelFPGA_lite/23.1std/questa_fse/bin/"
+# OSS CAD Suite, TODO install this properly
+source $HOME/Downloads/oss-cad-suite/environment
+
+# Reboot directly to Windows
+# Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
+windows() {
+	# Set the next grub boot via grub2-reboot. See manpage for info.
+    sudo grub2-reboot "Windows Boot Manager (on /dev/nvme0n1p1)" && sudo reboot
+}
+
