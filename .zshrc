@@ -218,10 +218,10 @@ if [ -f "$zsh_syntax_highlighting_path" ]; then
 fi
 
 # OSS CAD Suite, TODO install this properly
-oss_cad_path="$HOME/Downloads/oss-cad-suite/environment"
-if [ -f "$oss_cad_path"	]; then
-	source "$oss_cad_path"
-fi
+# oss_cad_path="$HOME/Downloads/oss-cad-suite/environment"
+# if [ -f "$oss_cad_path"	]; then
+# 	source "$oss_cad_path"
+# fi
 
 # Reboot directly to Windows
 # Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
