@@ -204,12 +204,24 @@ alias diff="kitty +kitten diff"
 alias kssh="kitty +kitten ssh"
 
 # Fun prompt
-fortune 
-pokemon-colorscripts --random
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if command -v fortune &> /dev/null; then
+	fortune 
+fi
+
+if command -v pokemon-colorscripts &> /dev/null; then
+	pokemon-colorscripts --random
+fi 
+
+zsh_syntax_highlighting_path="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -f "$zsh_syntax_highlighting_path" ]; then
+	source "$zsh_syntax_highlighting_path"
+fi
 
 # OSS CAD Suite, TODO install this properly
-source $HOME/Downloads/oss-cad-suite/environment
+oss_cad_path="$HOME/Downloads/oss-cad-suite/environment"
+if [ -f "$oss_cad_path"	]; then
+	source "$oss_cad_path"
+fi
 
 # Reboot directly to Windows
 # Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
