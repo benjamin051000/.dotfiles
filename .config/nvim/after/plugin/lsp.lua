@@ -4,13 +4,14 @@ local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- lspconfig default settings
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- TODO move these into on_attach?
 local opts = { noremap = true, silent = false }
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
--- Shamelessly stolen from https://github.com/AlphaKeks/home/blob/master/.config/nvim/after/plugin/lsp.lua#L94-102
+-- From https://github.com/AlphaKeks/home/blob/master/.config/nvim/after/plugin/lsp.lua#L94-102
 local function format_on_save(bufnr)
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = format_group,
@@ -56,8 +57,14 @@ end
 
 local lsp_flags = {
 	-- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
+	debounce_text_changes = 150, -- TODO remove?
 }
+
+
+-- lsp lines
+require("lsp_lines").setup()
+
+vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 
 require("lspconfig").pyright.setup({
 	capabilities = default_capabilities,
@@ -65,46 +72,13 @@ require("lspconfig").pyright.setup({
 	flags = lsp_flags,
 })
 
--- require("lspconfig")["tsserver"].setup({
---     capabilities = default_capabilities,
---     on_attach = on_attach,
---     flags = lsp_flags,
--- })
-
-local rt = require("rust-tools")
-rt.setup({
-	server = {
-		on_attach = function(client, bufnr)
-			-- Run the normal on_attach function for all LSP stuffs
-			on_attach(client, bufnr)
-
-			-- Hover actions
-			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-			-- Code action groups
-			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-		end,
-
-		capabilities = default_capabilities,
-
-		settings = {
-			-- See settings here: https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
-			-- and here: https://hw0lff.github.io/rust-analyzer-docs/2022-07-04/index.html#rust-analyzer_cargo_buildscripts_enable
-			["rust-analyzer"] = {
-				-- For now, let's just stick with the defaults.
-
-				-- imports = {
-				-- 	granularity = {
-				-- 		group = "module",
-				-- 	},
-				-- 	prefix = "self",
-				-- },
-			},
-		}, -- end of settings
-	}, -- end of server
-})
+require"lspconfig".rust_analyzer.setup{
+	capabilities = default_capabilities,
+	on_attach = on_attach,
+}
 
 -- c/c++
-require("lspconfig").clangd.setup({
+require"lspconfig".clangd.setup({
 	capabilities = default_capabilities,
 	on_attach = on_attach,
 	flags = lsp_flags,
@@ -116,17 +90,14 @@ require("lspconfig").clangd.setup({
 --     flags = lsp_flags
 -- }
 
--- lsp lines
-require("lsp_lines").setup()
 
 vim.diagnostic.config({
 	virtual_text = false,
 })
 
-require("lspconfig").lua_ls.setup({
+require"lspconfig".lua_ls.setup({
 	capabilities = default_capabilities,
 	on_attach = on_attach,
 	flags = lsp_flags,
 })
 
-vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })

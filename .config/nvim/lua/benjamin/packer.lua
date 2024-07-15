@@ -44,8 +44,6 @@ return require("packer").startup(function(use)
 
 	use "numToStr/Comment.nvim"                 -- auto comment
 
-	use "simrat39/rust-tools.nvim"              -- auto-install rust LSP stuff because apparently it's not easy
-
 	use {
 		"abecodes/tabout.nvim",
 		wants = { "nvim-treesitter" }, -- or require if not used so far
