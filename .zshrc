@@ -39,7 +39,8 @@ fi
 # Questa
 if [ -d "$HOME/.intelFPGA_lite/23.1std/questa_fse/bin/" ]; then
 	export PATH="$PATH:$HOME/.intelFPGA_lite/23.1std/questa_fse/bin/"
-	export LM_LICENSE_FILE="$HOME/.intelFPGA_lite/23.1std/LR-162888_License.dat"
+	export LM_LICENSE_FILE="/home/benjamin/.intelFPGA_lite/23.1std/LR-182033_License.dat"
+	
 fi
 
 if [ -d "$HOME/.spicetify" ]; then
@@ -96,7 +97,11 @@ if command -v dnf &> /dev/null; then
     alias dnfi="sudo dnf install"
     alias dnfc="sudo dnf check-update"
     alias dnfu="sudo dnf update"
+	alias update="dnfc && dnfu"
+elif command -v zypper &> /dev/null; then
+	alias update="sudo zypper refresh && sudo zypper dist-upgrade"
 fi
+
 
 # (neo)vim aliases
 # these are set up in a redundant manner, where
@@ -193,6 +198,7 @@ export GIT_EDITOR VISUAL EDITOR
 
 if ! command -v reboot &> /dev/null; then
 	alias reboot="systemctl reboot"
+	alias restart="reboot"
 fi
 
 
@@ -222,6 +228,7 @@ fi
 # if [ -f "$oss_cad_path"	]; then
 # 	source "$oss_cad_path"
 # fi
+
 
 # Reboot directly to Windows
 # Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
