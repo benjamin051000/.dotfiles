@@ -61,16 +61,11 @@ local lsp_flags = {
 }
 
 
--- lsp lines
-require("lsp_lines").setup()
-
-vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
-
-require("lspconfig").pyright.setup({
+require"lspconfig".pyright.setup{
 	capabilities = default_capabilities,
 	on_attach = on_attach,
 	flags = lsp_flags,
-})
+}
 
 require"lspconfig".rust_analyzer.setup{
 	capabilities = default_capabilities,
@@ -78,11 +73,11 @@ require"lspconfig".rust_analyzer.setup{
 }
 
 -- c/c++
-require"lspconfig".clangd.setup({
+require"lspconfig".clangd.setup{
 	capabilities = default_capabilities,
 	on_attach = on_attach,
 	flags = lsp_flags,
-})
+}
 
 -- require 'lspconfig'.shellcheck.setup{
 --     capabilities = default_capabilities,
@@ -91,13 +86,20 @@ require"lspconfig".clangd.setup({
 -- }
 
 
-vim.diagnostic.config({
-	virtual_text = false,
-})
+-- Disable virtual_text since it's redundant due to lsp_lines.
+vim.diagnostic.config{
+  virtual_text = false,
+}
 
-require"lspconfig".lua_ls.setup({
+-- lsp lines
+require("lsp_lines").setup()
+
+vim.keymap.set("", "<leader>el", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+
+
+require"lspconfig".lua_ls.setup{
 	capabilities = default_capabilities,
 	on_attach = on_attach,
 	flags = lsp_flags,
-})
+}
 
