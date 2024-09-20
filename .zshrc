@@ -73,7 +73,8 @@ if command -v eza &> /dev/null; then
     alias l="eza -F"
     alias ls="eza -F"
     alias ll="eza -laF --git --group --header"
-    alias t="eza -Tl --level 5 --no-user --git --header"
+	alias llr="ll --time-style relative"
+    alias t="eza -Tl --level 5 --no-user --git --header -F"
 
 else
     alias ls="ls --color=auto"
