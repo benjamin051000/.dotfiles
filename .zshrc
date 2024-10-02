@@ -139,8 +139,16 @@ alias open=xdg-open
 alias weather='curl wttr.in'
 
 if command -v fzf &> /dev/null; then
-	# Set up fzf shell integration (^T, ^R, **, etc.)
-	eval "$(fzf --zsh)"
+	# Check if the version is high enough to support this method.
+	# I need this because currently debian/ubuntu doesn't have v0.48
+	# which supports the --zsh flag.
+	if fzf --zsh &> /dev/null; then
+		# Set up fzf key bindings and fuzzy completion
+		source <(fzf --zsh)
+	else
+		source /usr/share/doc/fzf/examples/key-bindings.zsh 
+		source /usr/share/doc/fzf/examples/completion.zsh
+	fi
 else
 	# Reverse search history via C-r
     bindkey '^R' history-incremental-search-backward
@@ -238,3 +246,6 @@ windows() {
     sudo grub2-reboot "Windows Boot Manager (on /dev/nvme0n1p1)" && sudo reboot
 }
 
+source "$HOME/.workrc"
+
+. "$HOME/.cargo/env"
