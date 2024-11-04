@@ -219,10 +219,6 @@ alias diff="kitty +kitten diff"
 alias kssh="kitty +kitten ssh"
 
 # Fun prompt
-if command -v fortune &> /dev/null; then
-	fortune 
-fi
-
 if command -v pokemon-colorscripts &> /dev/null; then
 	pokemon-colorscripts --random
 fi 
