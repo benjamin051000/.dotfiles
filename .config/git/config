@@ -1,7 +1,7 @@
 [user]
 	name = Benjamin Wheeler
-	email = benjaminwheeler0510@gmail.com
-	signingkey = /home/benjamin/.ssh/id_ed25519.pub
+	# email = benjaminwheeler0510@gmail.com Sometimes I use $JOB email for this
+
 [init]
     defaultBranch = main
 
@@ -29,16 +29,20 @@
     lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
     sw = switch
+	swc = switch -c
 	a = add
 	c = commit
 	s = status
 	b = branch
 	d = diff
 
+	f = fetch
+	fa = fetch --all
+	pushf = push --force-with-lease
+
 [push]
 	autoSetupRemote = true
 
-[gpg]
-	format = ssh
 [commit]
 	gpgsign = true
+
