@@ -34,6 +34,7 @@
 	c = commit
 	s = status
 	b = branch
+	ba = branch --all
 	d = diff
 
 	f = fetch
