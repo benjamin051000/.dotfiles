@@ -110,6 +110,7 @@ fi
 # or vim installed
 if command -v nvim &> /dev/null; then
     alias vim=nvim
+	export MANPAGER='nvim +Man!'
 fi
 alias vi=vim
 alias v=vi
@@ -247,3 +248,19 @@ bashcompinit
 source "$HOME/.workrc"
 
 . "$HOME/.cargo/env"
+
+# Override because sometimes KDE forgets how to connect to the monitor
+brightness() {
+	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$#" -ne 1 ]; then
+		echo "Usage: brightness [-h|--help] brightness-value" >&2
+		return
+	fi
+	ddcutil setvcp 10 "$1"
+}
+
+fix_powerdevil() {
+	# These don't seem to work
+	# local temp=$(ddcutil getvcp --brief 10 | awk '{print $4;}')
+	systemctl --user restart plasma-powerdevil.service
+	# ddcutil setvcp 10 $temp
+}
