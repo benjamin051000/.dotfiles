@@ -85,9 +85,9 @@ fi
 
 # Follow copied and moved files to destination directory
 # From https://unix.stackexchange.com/questions/49802/follow-a-moved-file-to-its-destination-directory
-goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
-cpf() { cp "$@" && goto "$_"; }
-mvf() { mv "$@" && goto "$_"; }
+_goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
+cpf() { cp "$@" && _goto "$_"; }
+mvf() { mv "$@" && _goto "$_"; }
 
 # zsh has .. builtin!
 # alias ..="cd .."
