@@ -69,5 +69,14 @@ return require("packer").startup(function(use)
 	-- a fun one
 	use "eandrju/cellular-automaton.nvim"
 
+	use {
+		'folke/trouble.nvim',
+		tag = 'v2.2.2',
+		requires = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require "trouble".setup {}
+		end
+	}
+
 	-- use 'jose-elias-alvarez/null-ls.nvim'
 end)
