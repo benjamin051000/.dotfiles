@@ -221,7 +221,12 @@ alias kssh="kitty +kitten ssh"
 
 # Fun prompt
 if command -v pokemon-colorscripts &> /dev/null; then
-	pokemon-colorscripts --random
+
+	shiny=""
+	if [ $((1 + $RANDOM % 30)) -eq 30 ]; then
+		shiny="--shiny"
+	fi
+	pokemon-colorscripts --random $shiny
 fi 
 
 zsh_syntax_highlighting_path="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
