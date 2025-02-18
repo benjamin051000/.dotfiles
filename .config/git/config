@@ -32,13 +32,17 @@
 	swc = switch -c
 	a = add
 	c = commit
+	cs = commit --signoff
+	ca = commit --amend
 	s = status
 	b = branch
 	ba = branch --all
 	d = diff
+	ds = diff --staged
 
 	f = fetch
 	fa = fetch --all
+	fap = fetch --all --prune
 	pushf = push --force-with-lease
 
 [push]
