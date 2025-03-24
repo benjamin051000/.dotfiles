@@ -1,37 +1,43 @@
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(client, bufnr)
+local function on_attach(_client, bufnr)
 	-- Enable symbol completion triggered by <C-x><C-o>
 	-- Code completion: <C-x><C-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = false, buffer = bufnr }
+	local opts = { noremap = true, silent = false, buffer = bufnr }
+	local buf = vim.lsp.buf
 
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts) -- go to Declaration
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts) -- go to Definition
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("n", "<C-space>", vim.lsp.buf.hover, bufopts) -- hover gives details about the symbol the cursor is on
+	local map = function(keys, func, desc, mode)
+		mode = mode or 'n'
+		vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+	end
+
+	map("gD", buf.declaration, opts) -- go to Declaration
+	map("gd", buf.definition, opts) -- go to Definition
+	map("gi", buf.implementation, opts)
+	map("<C-space>", buf.hover, opts) -- hover gives details about the symbol the cursor is on
 
 	-- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
-	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	map("<space>wa", buf.add_workspace_folder, opts)
+	map("<space>wr", buf.remove_workspace_folder, opts)
+	map("<space>wl", function()
+		print(vim.inspect(buf.list_workspace_folders()))
+	end, opts)
+	map("<space>D", buf.type_definition, opts)
+	map("<space>rn", buf.rename, opts)
+	map("<space>ca", buf.code_action, opts)
+	map("gr", buf.references, opts)
 	-- TODO BUG sometimes this doesn't show up, like for stylua (which doesn't have an lsp here...)
-	vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+	map("<space>f", buf.format, opts)
 
-	vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-	vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+	map("<space>e", vim.diagnostic.open_float, opts)
+	map("[d", vim.diagnostic.goto_prev, opts)
+	map("]d", vim.diagnostic.goto_next, opts)
+	map("<space>q", vim.diagnostic.setloclist, opts)
 
 	-- format_on_save(bufnr)
 end
@@ -43,6 +49,7 @@ return {
 		"neovim/nvim-lspconfig",
 		"hrsh7th/cmp-nvim-lsp",
 	},
+	event = "VeryLazy",
 	config = function()
 		require("mason-lspconfig").setup()
 
