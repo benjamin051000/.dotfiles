@@ -10,6 +10,7 @@ bindkey -v
 zstyle ':completion:*' menu select 
 zstyle :compinstall filename '$HOME/.zshrc'
 
+fpath+=~/.zfunc
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -43,28 +44,33 @@ if [ -d "$HOME/.intelFPGA_lite/23.1std/questa_fse/bin/" ]; then
 	
 fi
 
+if [ -d "$HOME/.utils/verilator" ]; then
+	export PATH="$PATH:$HOME/.utils/verilator/bin"
+	export MANPATH="$MANPATH:$HOME/.utils/verilator/share/man"
+fi
+
 if [ -d "$HOME/.spicetify" ]; then
     export PATH=$PATH:$HOME/.spicetify
 fi
 
 # ~/utils directory
-if [ -d "$HOME/utils" ] ; then
-    UTILS="$HOME/utils"
-
-    export PATH="$UTILS/bin:$PATH"
-    export MANPATH="$UTILS/share:$MANPATH"
-
-    # Set up C libraries and whatnot
-    export C_INCLUDE_PATH="$UTILS/include:$C_INCLUDE_PATH"
-    export CPLUS_INCLUDE_PATH="$UTILS/include:$CPLUS_INCLUDE_PATH"
-
-    export LIBRARY_PATH="$UTILS/lib:$LIBRARY_PATH"
-    export LD_LIBRARY_PATH="$UTILS/lib:$LD_LIBRARY_PATH"
-
-    unset UTILS
-else
-    # echo "Can't find ~/utils dir. Skipping"
-fi
+# if [ -d "$HOME/.utils" ] ; then
+#     UTILS="$HOME/.utils"
+#
+#     export PATH="$UTILS/bin:$PATH"
+#     export MANPATH="$UTILS/share:$MANPATH"
+#
+#     # Set up C libraries and whatnot
+#     export C_INCLUDE_PATH="$UTILS/include:$C_INCLUDE_PATH"
+#     export CPLUS_INCLUDE_PATH="$UTILS/include:$CPLUS_INCLUDE_PATH"
+#
+#     export LIBRARY_PATH="$UTILS/lib:$LIBRARY_PATH"
+#     export LD_LIBRARY_PATH="$UTILS/lib:$LD_LIBRARY_PATH"
+#
+#     unset UTILS
+# else
+#     echo "Can't find ~/.utils dir. Skipping"
+# fi
 
 ##############################
 # Aliases
@@ -118,16 +124,10 @@ alias v=vi
 
 # git
 alias g="git"
-# alias gs="git status"
-# alias ga="git add"
-# alias gsw="git switch"
-# alias glog="git log"
-# alias gcl="git clone"
-# alias gcm="git commit"
-alias gpush="git push"
-alias gpull="git pull"
 # alias gdiff="git difftool --no-symlinks --dir-diff"
 # alias gd=gdiff
+
+alias rmr="rm -r"
   
 # Starship prompt
 eval "$(starship init zsh)"
