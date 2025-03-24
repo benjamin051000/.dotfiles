@@ -12,7 +12,7 @@ local function on_attach(_client, bufnr)
 
 	local map = function(keys, func, desc, mode)
 		mode = mode or 'n'
-		vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+		vim.keymap.set(mode, keys, func, opts)
 	end
 
 	map("gD", buf.declaration, opts) -- go to Declaration

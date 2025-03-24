@@ -9,7 +9,7 @@ return {
     -- opt = true,  -- Set this to true if the plugin is optional
     event = "InsertCharPre",
     -- priority = 1000,
-    lazy = false,
+    -- lazy = false,
     config = function()
       require("tabout").setup({
         tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
