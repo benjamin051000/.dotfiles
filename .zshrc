@@ -79,7 +79,7 @@ if command -v eza &> /dev/null; then
     alias l="eza -F"
     alias ls="eza -F"
     alias ll="eza -laF --git --group --header"
-	alias llr="ll --time-style relative"
+	alias llr="ll --time-style relative --sort old"
     alias t="eza -Tl --level 5 --no-user --git --header -F --git-ignore"
 
 else
@@ -124,13 +124,13 @@ alias v=vi
 
 # git
 alias g="git"
-# alias gdiff="git difftool --no-symlinks --dir-diff"
-# alias gd=gdiff
 
 alias rmr="rm -r"
   
 # Starship prompt
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+	eval "$(starship init zsh)"
+fi
 
 
 # open files in default app
