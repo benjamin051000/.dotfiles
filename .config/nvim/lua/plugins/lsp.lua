@@ -1,6 +1,6 @@
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local function on_attach(bufnr)
+local function on_attach(_, bufnr)
 	-- Enable symbol completion triggered by <C-x><C-o>
 	-- Code completion: <C-x><C-o>
 	-- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
