@@ -5,17 +5,21 @@
 [init]
     defaultBranch = main
 
-# Added for kitty diff
 [diff]
-    tool = kitty
+    tool = difftastic
     guitool = kitty.gui
 [difftool]
     prompt = false
     trustExitCode = true
+
 [difftool "kitty"]
     cmd = kitty +kitten diff $LOCAL $REMOTE
 [difftool "kitty.gui"]
     cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+
+[difftool "difftastic"]
+    # See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
 
 [alias]
 	# From https://stackoverflow.com/questions/1838873/visualizing-branch-topology-in-git#answer-7509303
@@ -38,6 +42,7 @@
 	b = branch
 	ba = branch --all
 	d = diff
+	dt = difftool
 	ds = diff --staged
 
 	f = fetch
