@@ -165,7 +165,8 @@ fi
 
 alias tm="tmux"
 
-alias py="python3.12"
+# Hopefully this will default to the latest installed version
+alias py="python3"
 
 # thefuck
 if command -v thefuck &> /dev/null; then
