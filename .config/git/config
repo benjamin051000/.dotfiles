@@ -1,3 +1,6 @@
+[include]
+	path = workgitconfig
+
 [user]
 	name = Benjamin Wheeler
 	# email = benjaminwheeler0510@gmail.com Sometimes I use $JOB email for this
