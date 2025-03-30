@@ -139,6 +139,8 @@ alias open=xdg-open
 # weather :)
 alias weather='curl wttr.in'
 
+alias ip="ip --color=auto"
+
 if command -v fzf &> /dev/null; then
 	# Check if the version is high enough to support this method.
 	# I need this because currently debian/ubuntu doesn't have v0.48
@@ -270,3 +272,6 @@ fix_powerdevil() {
 	systemctl --user restart plasma-powerdevil.service
 	# ddcutil setvcp 10 $temp
 }
+
+# Use this for ssh sessions with no kitty-terminfo
+# export TERM=xterm-256color
