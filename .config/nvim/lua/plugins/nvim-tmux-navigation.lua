@@ -3,23 +3,23 @@ return {
 	keys = {
 		{
 			"<C-h>",
-			-- "<Cmd>NvimTmuxNavigateLeft<cr>",
-			-- desc = "Navigate left"
+			"<Cmd>NvimTmuxNavigateLeft<cr>",
+			desc = "Navigate left"
 		},
 		{
 			"<C-j>",
-			-- "<Cmd>NvimTmuxNavigateDown<cr>",
-			-- desc = "Navigate down"
+			"<Cmd>NvimTmuxNavigateDown<cr>",
+			desc = "Navigate down"
 		},
 		{
 			"<C-k>",
-			-- "<Cmd>NvimTmuxNavigateUp<cr>",
-			-- desc = "Navigate up"
+			"<Cmd>NvimTmuxNavigateUp<cr>",
+			desc = "Navigate up"
 		},
 		{
 			"<C-l>",
-			-- "<Cmd>NvimTmuxNavigateRight<cr>",
-			-- desc = "Navigate right"
+			"<Cmd>NvimTmuxNavigateRight<cr>",
+			desc = "Navigate right"
 		},
 	},
 	config = true,
