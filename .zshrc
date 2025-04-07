@@ -49,6 +49,12 @@ if [ -d "$HOME/.utils/verilator" ]; then
 	export MANPATH="$MANPATH:$HOME/.utils/verilator/share/man"
 fi
 
+# TODO make this a function or something to simplify it?
+if [ -d "$HOME/.utils/shaderc" ]; then
+	export PATH="$PATH:$HOME/.utils/shaderc/bin"
+	export MANPATH="$MANPATH:$HOME/.utils/shaderc/share/man"
+fi
+
 if [ -d "$HOME/.spicetify" ]; then
     export PATH=$PATH:$HOME/.spicetify
 fi
