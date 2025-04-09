@@ -46,11 +46,11 @@ end
 return {
 	"williamboman/mason-lspconfig.nvim",
 	dependencies = {
-		{"williamboman/mason.nvim", config = true },
+		{"williamboman/mason.nvim", config = true, lazy = false },
 		"neovim/nvim-lspconfig",
 		"hrsh7th/cmp-nvim-lsp",
 	},
-	event = "VeryLazy",
+	event = {"BufReadPre", "BufNewFile"},
 	config = function()
 		require("mason-lspconfig").setup()
 
