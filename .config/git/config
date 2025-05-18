@@ -38,6 +38,7 @@
     sw = switch
 	swc = switch -c
 	a = add
+	ap = add --patch
 	c = commit
 	cs = commit --signoff
 	ca = commit --amend

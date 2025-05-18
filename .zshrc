@@ -10,6 +10,7 @@ bindkey -v
 zstyle ':completion:*' menu select 
 zstyle :compinstall filename '$HOME/.zshrc'
 
+# Added for `rustup completions`
 fpath+=~/.zfunc
 autoload -Uz compinit
 compinit
@@ -18,6 +19,8 @@ compinit
 ##################################################
 # Added by me
 ##################################################
+
+unsetopt completealiases
 
 # bindkey -v is more like vi than vim. Here are some vim-like patches:
 # (I think this is) from https://vi.stackexchange.com/questions/31671/set-o-vi-in-zsh-backspace-doesnt-delete-non-inserted-characters
