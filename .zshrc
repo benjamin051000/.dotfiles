@@ -85,11 +85,11 @@ fi
 # Aliases
 ##############################
 if command -v eza &> /dev/null; then
-    alias l="eza -F"
-    alias ls="eza -F"
-    alias ll="eza -laF --git --group --header"
+    alias ls="eza -F auto"
+    alias l="ls"
+    alias ll="eza -laF auto --git --group --header"
 	alias llr="ll --time-style relative --sort old"
-    alias t="eza -Tl --level 5 --no-user --git --header -F --git-ignore"
+    alias t="eza -Tl --level 5 --no-user --git --header -F auto --git-ignore"
 
 else
     alias ls="ls --color=auto"
