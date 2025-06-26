@@ -282,5 +282,17 @@ fix_powerdevil() {
 	# ddcutil setvcp 10 $temp
 }
 
+# uv shell completion
+if command -v uv &> /dev/null; then
+	eval "$(uv generate-shell-completion zsh)"
+	eval "$(uvx --generate-shell-completion zsh)"
+fi
+
+# ruff shell completion
+# NOTE: I installed this via `uv tool install ruff`
+if command -v ruff &> /dev/null; then
+	eval "$(ruff generate-shell-completion zsh)"
+fi
+
 # Use this for ssh sessions with no kitty-terminfo
 # export TERM=xterm-256color
