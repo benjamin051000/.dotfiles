@@ -125,10 +125,24 @@ fi
 # or vim installed
 if command -v nvim &> /dev/null; then
     alias vim=nvim
+	GIT_EDITOR=nvim
+	VISUAL=nvim
+	EDITOR=nvim
 	export MANPAGER='nvim +Man!'
+elif command -v nvim-linux-x86_64.appimage &> /dev/null; then
+    alias vim=nvim-linux-x86_64.appimage
+	GIT_EDITOR=nvim-linux-x86_64.appimage
+	VISUAL=nvim-linux-x86_64.appimage
+	EDITOR=nvim-linux-x86_64.appimage
 fi
+export GIT_EDITOR VISUAL EDITOR
+
+# TODO what if 'vi' is installed, not 'vim'?
+# if command -v vim &> /dev/null; then
+# fi
 alias vi=vim
 alias v=vi
+
 
 
 # git
@@ -203,15 +217,6 @@ alias clip="xclip -selection c"
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
-
-##############################
-# Set editors to neovim
-##############################
-# TODO what if it isn't installed? can I use the `v` alias?
-GIT_EDITOR=nvim
-VISUAL=nvim
-EDITOR=nvim
-export GIT_EDITOR VISUAL EDITOR
 
 
 ##############################
