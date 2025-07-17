@@ -45,6 +45,8 @@ end
 
 abbr --add py python
 
+# Add ~/.local/bin to PATH
+fish_add_path ~/.local/bin/
 
 function fish_greeting 
 	if type --query pokemon-colorscripts
@@ -60,10 +62,10 @@ end
 
 # Reboot directly to Windows
 # Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
-function windows
-	# Set the next grub boot via grub2-reboot. See manpage for info.
-    sudo grub2-reboot "Windows Boot Manager (on /dev/nvme0n1p1)" && sudo reboot
-end
+# function windows
+# 	# Set the next grub boot via grub2-reboot. See manpage for info.
+#     sudo grub2-reboot "Windows Boot Manager (on /dev/nvme0n1p1)" && sudo reboot
+# end
 
 function fix_powerdevil
 	# These don't seem to work
