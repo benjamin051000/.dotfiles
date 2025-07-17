@@ -29,7 +29,12 @@ end
 
 # fzf fuzzy-finder
 if type --query fzf
-	fzf --fish | source
+	if fzf --fish &> /dev/null
+		fzf --fish | source
+	else
+		source /usr/share/doc/fzf/examples/key-bindings.fish
+		source /usr/share/doc/fzf/examples/completion.fish
+	end
 end
 
 # Rust tools
