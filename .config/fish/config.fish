@@ -4,7 +4,6 @@ end
 
 
 abbr --add g git
-export GIT_EDITOR=nvim
 
 # eza (ls)
 if type --query eza 
@@ -25,6 +24,11 @@ if type --query nvim
 	abbr --add v nvim
 	# nvim as the pager
 	export MANPAGER="nvim +Man!"
+	export GIT_EDITOR=nvim
+else if type --query nvim-linux-x86_64.appimage
+	alias nvim=nvim-linux-x86_64.appimage
+	abbr --add v nvim
+	export GIT_EDITOR=nvim-linux-x86_64.appimage
 end
 
 # fzf fuzzy-finder
@@ -33,7 +37,6 @@ if type --query fzf
 		fzf --fish | source
 	else
 		source /usr/share/doc/fzf/examples/key-bindings.fish
-		source /usr/share/doc/fzf/examples/completion.fish
 	end
 end
 
