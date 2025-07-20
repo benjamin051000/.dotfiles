@@ -52,6 +52,7 @@ if type --query bat
 end
 
 abbr --add py python
+abbr --add python python3
 
 # Add ~/.local/bin to PATH
 fish_add_path ~/.local/bin/
