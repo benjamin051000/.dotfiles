@@ -56,6 +56,10 @@ vim.lsp.config("lua_ls", {
 	}
 })
 
+vim.lsp.config("*", {
+	on_attach = on_attach,
+})
+
 return {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
@@ -63,12 +67,4 @@ return {
         { "mason-org/mason.nvim", opts = {} },
         "neovim/nvim-lspconfig",
     },
-	config = function() 
-		vim.lsp.config("*", {
-			on_attach = on_attach,
-			capabilities = require("cmp_nvim_lsp").default_capabilities()
-		})
-		require("mason").setup{}
-		require("mason-lspconfig").setup{}
-	end
 }
