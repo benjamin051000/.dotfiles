@@ -44,50 +44,10 @@ local function on_attach(_, bufnr)
 end
 
 return {
-	"williamboman/mason-lspconfig.nvim",
-	version = "1.x",  -- v2.0 uses nvim builtin lspconfig
-	dependencies = {
-		{"williamboman/mason.nvim", config = true, lazy = false },
-		"neovim/nvim-lspconfig",
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	event = {"BufReadPre", "BufNewFile"},
-	config = function()
-		require("mason-lspconfig").setup()
-
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-		require("mason-lspconfig").setup_handlers {
-			-- The first entry (without a key) will be the default handler
-			-- and will be called for each installed server that doesn't have
-			-- a dedicated handler.
-			function (server_name) -- default handler (optional)
-				require("lspconfig")[server_name].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end,
-			-- Next, you can provide a dedicated handler for specific servers.
-			-- For example, a handler override for the `rust_analyzer`:
-			["lua_ls"] = function ()
-				require("lspconfig").lua_ls.setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = {
-						Lua = {
-							workspace = {
-								library = {
-									vim.env.VIMRUNTIME,
-								}
-							}
-						}
-					}
-				}) -- setup
-			end,
-			["pyright"] = function()
-				require 'lspconfig'.pyright.setup {on_attach = on_attach,settings = {pyright = {autoImportCompletion = true,},python = {analysis = {autoSearchPaths = true,diagnosticMode = 'openFilesOnly',useLibraryCodeForTypes = true,typeCheckingMode = 'off'}}}}
-			end
-		} -- setup_handlers
-
-	end
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
 }
