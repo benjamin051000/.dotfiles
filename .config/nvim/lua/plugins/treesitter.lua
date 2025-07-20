@@ -33,6 +33,9 @@ return {
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-context" -- sticky headers
+		"nvim-treesitter/nvim-treesitter-context", -- sticky headers
+		opts = {
+			enabled = true
+		}
 	}
 }
