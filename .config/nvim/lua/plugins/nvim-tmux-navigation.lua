@@ -22,5 +22,5 @@ return {
 			desc = "Navigate right"
 		},
 	},
-	config = true,
+	opts = {}
 }
