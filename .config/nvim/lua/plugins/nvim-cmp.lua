@@ -9,6 +9,7 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- source for LuaSnip
 		-- "sar/friendly-snippets", -- misc. lang-specific snippets
 		"windwp/nvim-autopairs", -- for extra configuration (see below)
+		"hrsh7th/cmp-nvim-lsp"  -- for LSPs. Required for nvim 0.11? 
 	},
 	config = function()
 		local cmp = require("cmp")
