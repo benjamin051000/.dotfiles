@@ -62,9 +62,10 @@ vim.lsp.config("*", {
 
 return {
     "mason-org/mason-lspconfig.nvim",
+	event = {"BufReadPre", "BufNewFile"},
     opts = {},
     dependencies = {
-        { "mason-org/mason.nvim", opts = {} },
+        { "mason-org/mason.nvim", config = true, lazy = false },
         "neovim/nvim-lspconfig",
     },
 }
