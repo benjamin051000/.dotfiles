@@ -48,7 +48,7 @@ end
 
 # bat
 if type --query bat 
-	abbr --add cat bat --pager less
+	alias cat="bat --pager less"
 end
 
 abbr --add py python
