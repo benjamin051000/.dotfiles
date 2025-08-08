@@ -49,10 +49,9 @@
 	dt = difftool
 	ds = diff --staged
 
-	f = fetch
-	fa = fetch --all
-	fap = fetch --all --prune
+	f = fetch --all --prune
 	pushf = push --force-with-lease
+	re = remote --verbose
 
 [push]
 	autoSetupRemote = true
