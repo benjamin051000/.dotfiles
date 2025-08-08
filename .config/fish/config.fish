@@ -12,6 +12,7 @@ if type --query eza
 	alias ll="ls --long"
 	alias tree="ls --tree --level 5 --no-user --header"
 	abbr --add t tree
+	alias llr="ll --time-style relative --sort old"
 end
 
 # multicd
