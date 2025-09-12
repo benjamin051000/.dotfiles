@@ -38,15 +38,17 @@
     sw = switch
 	swc = switch -c
 	a = add
+	au = add --update
 	ap = add --patch
 	c = commit
 	cs = commit --signoff
 	ca = commit --amend
 	s = status
-	b = branch
-	ba = branch --all
+	b = branch --verbose --verbose
+	ba = branch --all --verbose --verbose
 	d = diff
 	dt = difftool
+	dts = difftool --staged
 	ds = diff --staged
 
 	f = fetch --all --prune
