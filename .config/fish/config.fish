@@ -9,9 +9,8 @@ abbr --add g git
 if type --query eza 
 	alias ls="eza --classify=auto"
 	abbr --add l ls
-	alias ll="ls --long"
-	alias lla="ls --long --all"
-	alias tree="ls --tree --level 5 --no-user --header"
+	alias ll="ls --long --all"
+	alias tree="ls --tree --level 5 --no-user --header --git-ignore"
 	abbr --add t tree
 	alias llr="ll --time-style relative --sort old"
 	
