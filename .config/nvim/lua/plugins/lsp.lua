@@ -60,6 +60,9 @@ vim.lsp.config("*", {
 	on_attach = on_attach,
 })
 
+-- BUG for some reason I have to manually add this for clangd
+vim.lsp.config('clangd', { on_attach = on_attach })
+
 return {
     "mason-org/mason-lspconfig.nvim",
 	event = {"BufReadPre", "BufNewFile"},
