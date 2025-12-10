@@ -64,11 +64,11 @@ vim.lsp.config("*", {
 vim.lsp.config('clangd', { on_attach = on_attach })
 
 return {
-    "mason-org/mason-lspconfig.nvim",
-	event = {"BufReadPre", "BufNewFile"},
-    opts = {},
-    dependencies = {
-        { "mason-org/mason.nvim", opts = {}, lazy = false },
-        "neovim/nvim-lspconfig",
-    },
+	"mason-org/mason-lspconfig.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	opts = {},
+	dependencies = {
+		{ "mason-org/mason.nvim", opts = {}, lazy = false },
+		"neovim/nvim-lspconfig",
+	},
 }

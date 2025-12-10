@@ -1,6 +1,7 @@
 return {
-	'nvim-telescope/telescope.nvim', tag = '0.1.8',
-	dependencies = { 
+	'nvim-telescope/telescope.nvim',
+	tag = '0.1.8',
+	dependencies = {
 		'nvim-lua/plenary.nvim',
 		-- 'nvim-telescope/telescope-ui-select.nvim',
 
@@ -9,7 +10,7 @@ return {
 
 		-- "nvim-telescope/telescope-frecency.nvim",
 	},
-	keys = {"<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh"},
+	keys = { "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh" },
 	config = function()
 		local builtin = require('telescope.builtin')
 		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
