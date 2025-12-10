@@ -15,10 +15,10 @@ local function on_attach(_, bufnr)
 		vim.keymap.set(mode, keys, func, opts)
 	end
 
-	map("gD", buf.declaration, "go to [D]eclaration")
-	map("gd", buf.definition, "go to [d]efinition")
-	map("gi", buf.implementation, "go to [i]mplementation")
-	map("gr", buf.references, "go to [r]eferences")
+	map("gD", buf.declaration, "go to Declaration")
+	map("gd", buf.definition, "go to definition")
+	map("gi", buf.implementation, "go to implementation")
+	map("gr", buf.references, "go to references")
 	map("<C-space>", buf.hover, "hover")
 
 	map("<C-k>", buf.signature_help, "signature help")
