@@ -39,6 +39,7 @@
 
     sw = switch
 	swc = switch -c
+	swd = switch --detach
 	a = add
 	au = add --update
 	ap = add --patch
@@ -61,7 +62,9 @@
 	autoSetupRemote = true
 
 [commit]
-	gpgsign = true
+	gpgsign = false
 
 [rebase]
 	autoStash = true
+[merge]
+	conflictStyle = diff3
