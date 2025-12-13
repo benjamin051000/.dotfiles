@@ -33,6 +33,10 @@ else if type --query nvim-linux-x86_64.appimage
 	export GIT_EDITOR=nvim-linux-x86_64.appimage
 end
 
+export LESS="-FinqRsX"
+# difftastic: Always print color.
+export DFT_COLOR=always
+
 # fzf fuzzy-finder
 if type --query fzf
 	if fzf --fish &> /dev/null
