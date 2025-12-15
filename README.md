@@ -5,8 +5,7 @@ These are my environment files for my computer.
 - [GNU stow](https://www.gnu.org/software/stow/)
 - [Kitty](https://sw.kovidgoyal.net/kitty/) (terminal emulator)
 - [Neovim](https://neovim.io/) (text editor)
-  - [Packer](https://github.com/wbthomason/packer.nvim#quickstart)
-- [zsh](https://www.zsh.org/) (shell)
+- fish shell
     - [fzf](https://junegunn.github.io/fzf/)
 - [tmux](https://github.com/tmux/tmux)
 
@@ -17,9 +16,9 @@ cd ~
 git clone --recurse-submodules git@github.com:benjamin051000/.dotfiles.git 
 cd .dotfiles/
 # Use GNU stow to apply dotfiles.
-stow --dotfiles ~/.dotfiles/
+stow --dotfiles .
 # Optionally, use --adopt to bring in new changes added before cloning.
-stow --adopt ~/.dotfiles/
+stow --adopt .
 
 # Use git like normal.
 cd ~/.dotfiles/
