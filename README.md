@@ -16,7 +16,7 @@ cd ~
 git clone --recurse-submodules git@github.com:benjamin051000/.dotfiles.git 
 cd .dotfiles/
 # Use GNU stow to apply dotfiles.
-stow --dotfiles .
+stow .
 # Optionally, use --adopt to bring in new changes added before cloning.
 stow --adopt .
 
