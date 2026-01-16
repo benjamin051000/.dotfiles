@@ -1,0 +1,11 @@
+[Unit]
+Description=Arctis Headset Audio Switcher
+BindsTo=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d2-1\x2d2:1.0-sound-card2-controlC2.device
+After=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d2-1\x2d2:1.0-sound-card2-controlC2.device pipewire.service
+
+[Service]
+ExecStart=%h/.local/bin/headset-monitor.fish
+Restart=always
+
+[Install]
+WantedBy=default.target
