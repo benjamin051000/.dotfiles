@@ -1,5 +1,6 @@
 [Unit]
 Description=Arctis Headset Audio Switcher
+# found via `systemctl list-units 'sys-devices-*.device' | grep -i steel`
 BindsTo=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d2-1\x2d2:1.0-sound-card2-controlC2.device
 After=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d2-1\x2d2:1.0-sound-card2-controlC2.device pipewire.service
 
