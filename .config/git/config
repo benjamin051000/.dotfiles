@@ -68,3 +68,8 @@
 	autoStash = true
 [merge]
 	conflictStyle = diff3
+	tool = vimdiff
+
+[mergetool "vimdiff"]
+	path = nvim
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
