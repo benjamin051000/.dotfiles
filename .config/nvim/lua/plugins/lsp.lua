@@ -44,7 +44,7 @@ local function on_attach(_, bufnr)
 end
 
 
-vim.lsp.config("lua_ls", {
+vim.lsp.config["lua_ls"] = {
 	settings = {
 		Lua = {
 			workspace = {
@@ -54,14 +54,13 @@ vim.lsp.config("lua_ls", {
 			}
 		}
 	}
-})
+}
 
-vim.lsp.config("*", {
-	on_attach = on_attach,
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		on_attach(nil, args.buf)
+	end,
 })
-
--- BUG for some reason I have to manually add this for clangd
-vim.lsp.config('clangd', { on_attach = on_attach })
 
 return {
 	"mason-org/mason-lspconfig.nvim",
