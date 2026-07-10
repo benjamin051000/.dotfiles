@@ -27,10 +27,10 @@ if type --query nvim
 	# nvim as the pager
 	export MANPAGER="nvim +Man!"
 	export GIT_EDITOR=nvim
-else if type --query nvim-linux-x86_64.appimage
-	alias nvim=nvim-linux-x86_64.appimage
+else if type --query nvim-linux-x86_64.appimage.0.12
+	alias nvim=nvim-linux-x86_64.appimage.0.12
 	abbr --add v nvim
-	export GIT_EDITOR=nvim-linux-x86_64.appimage
+	export GIT_EDITOR=nvim-linux-x86_64.appimage.0.12
 end
 
 export LESS="-FinqRsX"
@@ -88,3 +88,13 @@ function fix_powerdevil
 	systemctl --user restart plasma-powerdevil.service
 	# ddcutil setvcp 10 $temp
 end
+
+if type --query cbonsai
+    alias bonsai="cbonsai --life 40 --multiplier 5 --time 20 --screensaver"
+end
+
+# Workaround for old version of fish shell, TODO when fish4.0 is available, remove this
+if test "$hostname" = "framework"
+	bind \cH backward-kill-word
+end
+
